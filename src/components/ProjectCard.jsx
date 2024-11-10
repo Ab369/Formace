@@ -1,6 +1,6 @@
 import bg1 from '../assets/bg1.jpg'
 
-export default function ProjectCard(){
+export default function ProjectCard({setShowProject}){
 
     return (
         <div className=" text-white inline-block m-4 bg-dark p-4 rounded-lg" >
@@ -8,7 +8,7 @@ export default function ProjectCard(){
             <div className="title lg:text-4xl md:text-3xl text-xl font-semibold">PROJECT NAME</div>
             <div className="description  text-wrap lg:text-xl md:text-xl">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores, sint. Dignissimos nam sequi optio dolorem recusandae quo, error adipisci pariatur.</div>
 
-            <button className='bg-black w-fit p-2 rounded-lg hover:scale-105'>CLICK TO VIEW</button>
+            <button className='bg-black w-fit p-2 rounded-lg hover:scale-105' onClick={()=>setShowProject(true)}>CLICK TO VIEW</button>
            </div>
         </div>
     )
