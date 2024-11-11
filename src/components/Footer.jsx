@@ -39,11 +39,11 @@ import { useRef } from 'react';
             <div className="bottom bg-cream1 grid md:grid-cols-2 p-10 md:items-center md:gap-0 gap-6">
                 
                 <div className="bottom-left w-1/2">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.405463352571!2d83.43055267488877!3d26.731434267858592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39915ca3e2aa136b%3A0xc039bdf0211338a9!2sMMM%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1731215274960!5m2!1sen!2sin" className='lg:w-[500px] lg:h-96 md:w-80 md:h-72' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.405463352571!2d83.43055267488877!3d26.731434267858592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39915ca3e2aa136b%3A0xc039bdf0211338a9!2sMMM%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1731215274960!5m2!1sen!2sin" className='lg:w-[500px] lg:h-96 md:w-80 md:h-72 w-80 h-80' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <div className="bottom-right flex flex-col  items-center lg:gap-10 md:gap-8 gap-6 justify-center">
-            <p className="flex justify-center items-center gap-2 lg:text-2xl md:text-xl text-xl">Drop your Message Below<span class="material-symbols-outlined">mail</span></p>
+            <p className="flex justify-center items-center gap-2 lg:text-2xl md:text-xl text-xl">Drop your Message Below</p>
 
         <form ref={form} onSubmit={sendEmail} className="form flex flex-col gap-4 lg:text-xl">
 
