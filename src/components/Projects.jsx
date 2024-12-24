@@ -13,9 +13,9 @@ function Projects(){
     const[showProject,setShowProject]=useState(false);
      
   return(
-    <div className="projects bg-grey px-4 py-14 text-center flex flex-col items-center gap-4 w-full">
+    <div id='project' className="projects bg-grey px-4 py-14 text-center flex flex-col items-center gap-4 w-full">
       <ProjectInfo showProject={showProject} setShowProject={setShowProject}></ProjectInfo>
-    <div className="text-zinc-600 md:text-4xl text-xl font-semibold">OUR PROJECTS</div>
+    <div className="text-zinc-600 md:text-5xl text-xl font-semibold">OUR PROJECTS</div>
     <div className={"relative w-[98vw] mx-auto overflow-x-auto whitespace-nowrap m-5 no-scrollbar transform transition-all duration-300 "+(showProject?"opacity-0":'opacity-100')} ref={scrollContainerRef}
     onWheel={handleWheel}>
         <ProjectCard setShowProject={setShowProject}></ProjectCard>

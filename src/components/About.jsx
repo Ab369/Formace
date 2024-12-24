@@ -1,8 +1,8 @@
 function About(){
 
     return(
-        <div className="about flex flex-col gap-4 bg-grey md:gap-0 text-zinc-600">
-            <div className="top text-center text-xl border-t-dark border-b-dark border-2 border-solid py-8 bg-grey font-semibold mt-1 text-zinc-600 md:text-4xl md:py-10">
+        <div id='about' className="about flex flex-col gap-4 bg-grey md:gap-0 text-zinc-600">
+            <div className="top text-center text-xl border-t-dark border-b-dark border-2 border-solid py-8 bg-grey font-semibold mt-1 text-zinc-600 md:text-5xl md:py-10">
              ABOUT US
             </div>
 

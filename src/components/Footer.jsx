@@ -23,7 +23,7 @@ import { useRef } from 'react';
     };
 
     return(
-        <div className="footer bg-cream2 flex flex-col">
+        <div id='contact' className="footer bg-cream2 flex flex-col">
             <div className="top grid md:grid-cols-2 lg:p-10 md:px-3 md:py-10 py-5 px-2 md:gap-0 gap-5 text-center">
              <div className="top-left lg:text-7xl md:text-5xl text-3xl font-semibold text-white">
                 CONNECT WITH US

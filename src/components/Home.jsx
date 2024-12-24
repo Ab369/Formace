@@ -18,7 +18,7 @@ function Home(){
     // },[backgrounds])
 
     return (
-        <div className="outer relative bg-cream2 border-t-2 border-solid border-dark w-full">
+        <div id='home' className="outer relative bg-cream2 border-t-2 border-solid border-dark w-full">
          <div className="inner flex justify-center text-center items-center bg-cover h-[60vh] md:h-[89vh]" style={{backgroundImage:`url(${currBackground})`}}>
           <div className='text-xl md:text-5xl text-dark font-semibold md:backdrop-blur-sm bg-opacity-50 p-2 rounded-md md:px-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe, rem.</div>
          </div>

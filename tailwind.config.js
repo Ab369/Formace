@@ -14,7 +14,7 @@ export default {
         dark:'#201A1E'
       },
       fontFamily:{
-       ubuntu: ["Ubuntu" ,"sans-serif"],
+       ubuntu: ["Mina" ,"sans-serif"],
        funnel:["Funnel Display", 'sans-serif'],
        plex:["IBM Plex Mono", "serif"]
       }
