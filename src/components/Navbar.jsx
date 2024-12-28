@@ -12,7 +12,7 @@ function Navbar(){
     }
 
     return (
-        <div className="navbar">
+        <div className="navbar w-full sticky top-0">
             <div className="logo text-xl md:text-3xl font-semibold font-plex">FORMACE</div>
             <Navitems navopen={navopen}></Navitems>
             <div className="toggle md:hidden" onClick={()=>changeToggle()}><span class="material-symbols-outlined">{(toggle?'menu':'close')}</span></div>

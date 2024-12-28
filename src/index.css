@@ -6,6 +6,10 @@ html::-webkit-scrollbar {
     display: none; /* Hide scrollbar in WebKit-based browsers */
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body{
     padding:0;
     margin:0;
