@@ -3,19 +3,18 @@ import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ProjectGallery = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   // --- 1. GENERATE ALL DATA ---
-  // We create the definitions for all 29 images first
   const allProjects = useMemo(() => {
     return Array.from({ length: 29 }, (_, i) => {
       const fileNum = i + 1;
       // Logic: Files 2-15 and 18 and 20 are .jpeg, the rest are .jpg
-      const isJpeg = (fileNum <= 15&&fileNum>1) || fileNum === 18||fileNum===20;
+      const isJpeg = (fileNum <= 15 && fileNum > 1) || fileNum === 18 || fileNum === 20;
       const extension = isJpeg ? 'jpeg' : 'jpg';
 
       return {
         id: i,
-        // Adjust path if necessary (e.g. './assets' vs '../assets')
         src: new URL(`../assets/${fileNum}.${extension}`, import.meta.url).href,
         title: `Project ${fileNum}`,
       };
@@ -23,23 +22,15 @@ const ProjectGallery = () => {
   }, []);
 
   // --- 2. SELECTION LOGIC ---
-  // Select 9 images total: Project 28 (static) + 8 Random others
+  // Still select 9 images total so desktop sees them all
   const visibleProjects = useMemo(() => {
-    const targetId = 27; // Array index for Project 28 (since ID starts at 0)
+    const targetId = 27; // Array index for Project 28
     
-    // Get the specific static image (28.jpg)
     const staticProject = allProjects.find(p => p.id === targetId);
-    
-    // Get everyone else
     const otherProjects = allProjects.filter(p => p.id !== targetId);
-
-    // Shuffle the "other" projects randomly
     const shuffled = [...otherProjects].sort(() => 0.5 - Math.random());
-
-    // Take the first 8 random images
     const randomSelection = shuffled.slice(0, 8);
 
-    // Return combined array: 28.jpg first, then the 8 random ones
     return [staticProject, ...randomSelection];
   }, [allProjects]);
 
@@ -66,7 +57,10 @@ const ProjectGallery = () => {
 
       {/* VIEW MORE LINK */}
       <div className="load-more-container">
-        <button onClick={()=>navigate('/Gallery')} className="load-more-btn">
+        <button onClick={() => {
+          navigate('/Gallery')
+          window.scrollTo(0,0)
+          }} className="load-more-btn">
           View More Projects
           <ArrowRight size={18} style={{ marginLeft: '8px' }} />
          </button>
@@ -112,9 +106,12 @@ const ProjectGallery = () => {
           margin: 0 auto;
         }
 
+        /* Tablet: 2 Columns */
         @media (min-width: 768px) {
           .masonry-grid { column-count: 2; }
         }
+        
+        /* Desktop: 3 Columns */
         @media (min-width: 1024px) {
           .masonry-grid { column-count: 3; }
         }
@@ -125,6 +122,13 @@ const ProjectGallery = () => {
           break-inside: avoid;
           overflow: hidden;
           border-radius: 2px;
+        }
+
+        /* 👉 NEW RULE: Hide items 6 through 9 on Mobile (max-width 767px) */
+        @media (max-width: 767px) {
+           .gallery-item:nth-child(n+6) {
+              display: none;
+           }
         }
 
         .gallery-item img {

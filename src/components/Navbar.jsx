@@ -53,21 +53,21 @@ function Navbar() {
     }
 
     return (
-        <div className="navbar w-full sticky top-0 bg-white z-50 md:py-4 shadow-sm">
+        <div className="navbar w-full sticky top-0 bg-white z-50 md:py-4 py-6 shadow-sm">
             <div className="container mx-auto md:px-6 flex justify-between items-center">
                 
                 <div 
                     className="logo text-2xl md:text-3xl font-semibold font-funnel cursor-pointer"
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                    FORMACE
+                    FORMACE.
                 </div>
 
                 <Navitems navopen={navopen} closeNav={() => setNavOpen(false)} />
 
-                <div className="toggle md:hidden cursor-pointer" onClick={() => setNavOpen(!navopen)}>
+                {/* <div className="toggle md:hidden cursor-pointer" onClick={() => setNavOpen(!navopen)}>
                     {navopen ? <X size={30} /> : <Menu size={30} />}
-                </div>
+                </div> */}
 
             </div>
         </div>

@@ -48,9 +48,9 @@ export default function Footer() {
              </div>
              
              {/* Contact Details Section */}
-             <div className="flex flex-col gap-4 min-w-[300px]">
+             <div className="flex flex-col gap-4 min-w-[300px] items-center justify-center align-center">
                 <p className="text-stone-300 text-base font-medium tracking-wide">For any queries contact:</p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center align-center">
                    {/* Updated Email with mailto link */}
                    <ContactPill 
                      Icon={Mail} 

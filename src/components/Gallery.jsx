@@ -99,7 +99,10 @@ const ImmersiveGallery = () => {
       <header className="sticky top-0 z-30 bg-stone-950/80 backdrop-blur-md border-b border-stone-800 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-row justify-between items-center">
           <div className="flex items-center gap-6">
-            <button onClick={()=>navigate('/')} className="text-stone-400 hover:text-white transition-colors p-2 -ml-2 rounded-full hover:bg-white/10 flex items-center justify-center">
+            <button onClick={()=>{
+                navigate('/')
+                window.scrollTo(0,0)
+            }} className="text-stone-400 hover:text-white transition-colors p-2 -ml-2 rounded-full hover:bg-white/10 flex items-center justify-center">
                <ArrowLeft size={24} />
             </button>
             <div className="flex items-center gap-3">
