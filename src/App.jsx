@@ -11,14 +11,13 @@ import { gsap } from "gsap";
 import "./App.css";
 
 const App = () => {
-  // Show preloader only once per user
-  const [isLoading, setIsLoading] = useState(
-    !localStorage.getItem("preloaderShown")
-  );
+  // Preloader shows ONLY on first load / refresh
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   const hideNavbar = location.pathname === "/gallery";
 
+  // GSAP page fade-in
   useEffect(() => {
     if (!isLoading) {
       gsap.set(".content", { opacity: 0, y: 10 });
@@ -32,7 +31,6 @@ const App = () => {
   }, [isLoading, location.pathname]);
 
   const handlePreloaderComplete = () => {
-    localStorage.setItem("preloaderShown", "true");
     setIsLoading(false);
   };
 
