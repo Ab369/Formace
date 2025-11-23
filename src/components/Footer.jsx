@@ -55,8 +55,8 @@ export default function Footer() {
                    <ContactPill 
                      Icon={Mail} 
                      label="Email Us" 
-                     value="bhawana29672@gmail.com" 
-                     href="mailto:bhawana29672@gmail.com"
+                     value="theformacegroup@gmail.com" 
+                     href="mailto:theformacegroup@gmail.com"
                    />
                    
                    {/* Updated Instagram with direct URL */}
