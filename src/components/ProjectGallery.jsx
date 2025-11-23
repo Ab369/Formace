@@ -1,15 +1,16 @@
 import React, { useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectGallery = () => {
-  
+  const navigate=useNavigate();
   // --- 1. GENERATE ALL DATA ---
   // We create the definitions for all 29 images first
   const allProjects = useMemo(() => {
     return Array.from({ length: 29 }, (_, i) => {
       const fileNum = i + 1;
-      // Logic: Files 1-15 and 18 are .jpeg, the rest are .jpg
-      const isJpeg = (fileNum <= 15&&fileNum>1) || fileNum === 18;
+      // Logic: Files 2-15 and 18 and 20 are .jpeg, the rest are .jpg
+      const isJpeg = (fileNum <= 15&&fileNum>1) || fileNum === 18||fileNum===20;
       const extension = isJpeg ? 'jpeg' : 'jpg';
 
       return {
@@ -65,10 +66,10 @@ const ProjectGallery = () => {
 
       {/* VIEW MORE LINK */}
       <div className="load-more-container">
-        <a href="/gallery" className="load-more-btn">
+        <button onClick={()=>navigate('/Gallery')} className="load-more-btn">
           View More Projects
           <ArrowRight size={18} style={{ marginLeft: '8px' }} />
-        </a>
+         </button>
       </div>
 
       {/* STYLES */}

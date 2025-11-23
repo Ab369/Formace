@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X } from 'lucide-react';
+import { useLocation } from "react-router-dom";
 
-// --- Internal Navitems Component ---
 function Navitems({ navopen, closeNav }) {
     const [activeSection, setActiveSection] = useState('home');
 
@@ -11,38 +11,6 @@ function Navitems({ navopen, closeNav }) {
         { label: 'PROJECTS', link: '#project' },
         { label: 'CONTACT', link: '#contact' },
     ];
-
-    // --- SCROLL LISTENER LOGIC ---
-    useEffect(() => {
-        const handleScroll = () => {
-            // 1. Check if user is at the very bottom of the page
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
-                setActiveSection('contact');
-                return;
-            }
-
-            // 2. Normal scroll logic for other sections
-            const scrollPosition = window.scrollY + 150; 
-
-            for (const item of items) {
-                const sectionId = item.link.replace('#', '');
-                const section = document.getElementById(sectionId);
-
-                if (section) {
-                    const { offsetTop, offsetHeight } = section;
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveSection(sectionId);
-                        break;
-                    }
-                }
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Run on mount
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <nav className={`
@@ -63,8 +31,8 @@ function Navitems({ navopen, closeNav }) {
                         hover:scale-110 transform transition-all duration-300 ease-in-out
                         pb-1 border-b-2 
                         ${activeSection === item.link.replace('#', '') 
-                            ? 'text-black border-black' // Active: Black Text + Black Underline
-                            : 'text-gray-600 border-transparent hover:text-black' // Inactive: Gray Text + Invisible Underline
+                            ? 'text-black border-black'
+                            : 'text-gray-600 border-transparent hover:text-black'
                         }
                     `}
                 >
@@ -75,17 +43,19 @@ function Navitems({ navopen, closeNav }) {
     );
 }
 
-// --- Main Navbar Component ---
 function Navbar() {
     const [navopen, setNavOpen] = useState(false);
-    
-    const changeToggle = () => setNavOpen(!navopen);
+    const location = useLocation();
+
+    // 👉 Hide navbar on /gallery route
+    if (location.pathname.toLowerCase() === "/gallery") {
+        return null;
+    }
 
     return (
         <div className="navbar w-full sticky top-0 bg-white z-50 md:py-4 shadow-sm">
             <div className="container mx-auto md:px-6 flex justify-between items-center">
                 
-                {/* LOGO */}
                 <div 
                     className="logo text-2xl md:text-3xl font-semibold font-funnel cursor-pointer"
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -93,11 +63,9 @@ function Navbar() {
                     FORMACE
                 </div>
 
-                {/* NAVIGATION */}
                 <Navitems navopen={navopen} closeNav={() => setNavOpen(false)} />
 
-                {/* MOBILE TOGGLE */}
-                <div className="toggle md:hidden cursor-pointer" onClick={changeToggle}>
+                <div className="toggle md:hidden cursor-pointer" onClick={() => setNavOpen(!navopen)}>
                     {navopen ? <X size={30} /> : <Menu size={30} />}
                 </div>
 

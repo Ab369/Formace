@@ -11,27 +11,27 @@ import { gsap } from "gsap";
 import "./App.css";
 
 const App = () => {
-  // Preloader shows ONLY on first load / refresh
+  // Preloader shows only once per page load
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   const hideNavbar = location.pathname === "/gallery";
 
-  // GSAP page fade-in
+  // Fade animation when content loads or route changes
   useEffect(() => {
     if (!isLoading) {
       gsap.set(".content", { opacity: 0, y: 10 });
       gsap.to(".content", {
         opacity: 1,
         y: 0,
-        duration: 0.2,
+        duration: 0.25,
         ease: "power3.out",
       });
     }
   }, [isLoading, location.pathname]);
 
   const handlePreloaderComplete = () => {
-    setIsLoading(false);
+    setIsLoading(false); // After this, preloader never shows again until refresh
   };
 
   return (
@@ -40,7 +40,6 @@ const App = () => {
         <Preloader onComplete={handlePreloaderComplete} />
       ) : (
         <Routes>
-          {/* Home Route */}
           <Route
             path="/"
             element={
@@ -54,7 +53,6 @@ const App = () => {
             }
           />
 
-          {/* Gallery Route (Navbar OFF) */}
           <Route
             path="/gallery"
             element={

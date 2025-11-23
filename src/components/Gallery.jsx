@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Grid, Columns, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ImmersiveGallery = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -13,7 +14,7 @@ const ImmersiveGallery = () => {
   // --- DATA ---
   const allProjects = Array.from({ length: 29 }, (_, i) => {
     const fileNum = i + 1;
-    const isJpeg = (fileNum <= 15 && fileNum > 1) || fileNum === 18;
+      const isJpeg = (fileNum <= 15&&fileNum>1) || fileNum === 18||fileNum===20;
     const extension = isJpeg ? 'jpeg' : 'jpg';
     return {
       id: i,
@@ -89,6 +90,8 @@ const ImmersiveGallery = () => {
     return {};
   };
 
+  const navigate=useNavigate();
+
   return (
     <div className="min-h-screen bg-stone-950 text-stone-200 font-sans selection:bg-white selection:text-black">
 
@@ -96,9 +99,9 @@ const ImmersiveGallery = () => {
       <header className="sticky top-0 z-30 bg-stone-950/80 backdrop-blur-md border-b border-stone-800 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-row justify-between items-center">
           <div className="flex items-center gap-6">
-            <a href="/" className="text-stone-400 hover:text-white transition-colors p-2 -ml-2 rounded-full hover:bg-white/10 flex items-center justify-center">
+            <button onClick={()=>navigate('/')} className="text-stone-400 hover:text-white transition-colors p-2 -ml-2 rounded-full hover:bg-white/10 flex items-center justify-center">
                <ArrowLeft size={24} />
-            </a>
+            </button>
             <div className="flex items-center gap-3">
               <div className="h-8 w-1 bg-white"></div>
               <div>
