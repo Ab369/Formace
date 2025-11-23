@@ -1,41 +1,73 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Preloader from "./components/Preloader";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
-import Projects from "./components/Projects";
 import Footer from "./components/Footer";
+import ProjectGallery from "./components/ProjectGallery";
+import Gallery from "./components/Gallery";
 import { gsap } from "gsap";
 import "./App.css";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  // Show preloader only once per user
+  const [isLoading, setIsLoading] = useState(
+    !localStorage.getItem("preloaderShown")
+  );
+
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/gallery";
 
   useEffect(() => {
     if (!isLoading) {
-      const tl = gsap.timeline();
-      tl.set(".content", { opacity: 0, y: 10 }) // Initial state
-        .to(".content", {
-          opacity: 1,
-          y: 0,
-          duration: 0.1,
-          ease: "power3.out"
-        });
+      gsap.set(".content", { opacity: 0, y: 10 });
+      gsap.to(".content", {
+        opacity: 1,
+        y: 0,
+        duration: 0.2,
+        ease: "power3.out",
+      });
     }
-  }, [isLoading]);
+  }, [isLoading, location.pathname]);
+
+  const handlePreloaderComplete = () => {
+    localStorage.setItem("preloaderShown", "true");
+    setIsLoading(false);
+  };
 
   return (
     <div className="font-ubuntu">
       {isLoading ? (
-        <Preloader onComplete={() => setIsLoading(false)} />
+        <Preloader onComplete={handlePreloaderComplete} />
       ) : (
-        <div className="content">
-          <Navbar />
-          <Home />
-          <About />
-          <Projects />
-          <Footer />
-        </div>
+        <Routes>
+          {/* Home Route */}
+          <Route
+            path="/"
+            element={
+              <div className="content">
+                {!hideNavbar && <Navbar />}
+                <Home />
+                <About />
+                <ProjectGallery />
+                <Footer />
+              </div>
+            }
+          />
+
+          {/* Gallery Route (Navbar OFF) */}
+          <Route
+            path="/gallery"
+            element={
+              <div className="content">
+                {!hideNavbar && <Navbar />}
+                <Gallery />
+                <Footer />
+              </div>
+            }
+          />
+        </Routes>
       )}
     </div>
   );

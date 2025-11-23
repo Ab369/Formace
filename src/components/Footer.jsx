@@ -1,67 +1,141 @@
-// import emailjs from '@emailjs/browser';
-import { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { Facebook, Instagram, Phone, Mail, Send, Loader2, MapPin } from 'lucide-react';
+// import emailjs from '@emailjs/browser'; // Uncomment this in your local project
 
- export default function Footer(){
+export default function Footer() {
+  const form = useRef();
+  const [status, setStatus] = useState('idle'); // 'idle', 'sending', 'success', 'error'
 
-    const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setStatus('sending');
 
-    const sendEmail = (e) => {
-      e.preventDefault();
-  
-      emailjs
-        .sendForm('service_60lg6ol','template_q6gvcwy', form.current, {
-          publicKey:'i2JrmKDSR_LrRsBn9',
-        })
-        .then(
-          () => {
-            alert('SEND SUCCESSFULLY');
-          },
-          (error) => {
-            alert('FAILED...', error.text);
-          },
-        );
-    };
+    // --- SIMULATION FOR UI PREVIEW (Remove this block in production) ---
+    setTimeout(() => {
+      setStatus('success');
+      // Reset form simulation
+      setTimeout(() => setStatus('idle'), 3000);
+    }, 2000);
+    // ---------------------------------------------------------------
+  };
 
-    return(
-        <div id='contact' className="footer bg-cream2 flex flex-col">
-            <div className="top grid md:grid-cols-2 lg:p-10 md:px-3 md:py-10 py-5 px-2 md:gap-0 gap-5 text-center">
-             <div className="top-left lg:text-7xl md:text-5xl text-3xl font-semibold text-white">
-                CONNECT WITH US
+  return (
+    <footer id='contact' className="relative bg-stone-950 text-stone-200 font-funnel pt-20 pb-10 overflow-hidden">
+       
+       {/* Background Texture/Image */}
+       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" 
+            style={{ 
+                backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+            }}>
+       </div>
+
+       {/* Gradient Overlay */}
+       <div className="absolute inset-0 z-0 bg-gradient-to-t from-stone-950 via-stone-950/90 to-transparent"></div>
+       
+       <div className="relative z-10 container mx-auto px-6">
+         
+         {/* TOP HEADER SECTION */}
+         <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-16 border-b border-stone-800 pb-10">
+             <div className="max-w-xl">
+                <h2 className="text-4xl md:text-6xl font-funnel text-white tracking-tight mb-4">
+                   Let's Build <br/> <span className="text-stone-500 italic font-serif">Something Iconic.</span>
+                </h2>
+                <p className="text-stone-400 text-lg max-w-lg">
+                   Ready to bring your vision to life? Reach out to our team of architects and designers.
+                </p>
              </div>
-             <div className="top-right flex md:flex-col items-center text-white">
-                <div className="fb">Facebook Logo</div>
-                <div className="insta">Instagram Logo</div>
-                <div className="whatsapp">Whatsapp Logo</div>
-                <div className="whatsapp">Phone number</div>
-             </div>
-            </div>
-
-            <div className="bottom bg-cream1 grid md:grid-cols-2 p-10 md:items-center md:gap-0 gap-6">
-                
-                <div className="bottom-left w-1/2">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.405463352571!2d83.43055267488877!3d26.731434267858592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39915ca3e2aa136b%3A0xc039bdf0211338a9!2sMMM%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1731215274960!5m2!1sen!2sin" className='lg:w-[500px] lg:h-96 md:w-80 md:h-72 w-80 h-80' allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+             
+             {/* Contact Details Section */}
+             <div className="flex flex-col gap-4 min-w-[300px]">
+                <p className="text-stone-300 text-base font-medium tracking-wide">For any queries contact:</p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                   {/* Updated Email with mailto link */}
+                   <ContactPill 
+                     Icon={Mail} 
+                     label="Email Us" 
+                     value="bhawana29672@gmail.com" 
+                     href="mailto:bhawana29672@gmail.com"
+                   />
+                   
+                   {/* Updated Instagram with direct URL */}
+                   <ContactPill 
+                     Icon={Instagram} 
+                     label="DM on Instagram" 
+                     value="@the_formace_architects" 
+                     href="https://www.instagram.com/the_formace_architects/?igsh=MW1tMjY4djQ4aTRnYQ%3D%3D#"
+                   />
                 </div>
+             </div>
+         </div>
 
-                <div className="bottom-right flex flex-col  items-center lg:gap-10 md:gap-8 gap-6 justify-center">
-            <p className="flex justify-center items-center gap-2 lg:text-2xl md:text-xl text-xl">Drop your Message Below</p>
+         {/* FOOTER BOTTOM: Socials & Copyright */}
+         <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-stone-800 pt-8">
+             
+             {/* Social Icons */}
+             <div className="flex gap-4">
+                <SocialIcon 
+                    Icon={Instagram} 
+                    label="Instagram" 
+                    href="https://www.instagram.com/the_formace_architects/?igsh=MW1tMjY4djQ4aTRnYQ%3D%3D#" 
+                />
+             </div>
 
-        <form ref={form} onSubmit={sendEmail} className="form flex flex-col gap-4 lg:text-xl">
+             <div className="text-center md:text-right">
+                <p className="text-stone-500 text-sm font-medium tracking-wide">FORMACE ARCHITECT SOLUTIONS</p>
+                <p className="text-stone-600 text-xs mt-1">© {new Date().getFullYear()} All rights reserved.</p>
+             </div>
+         </div>
 
-            <input type="email"  name="user_name" placeholder="Enter Your Email" className="bg-zinc-500   placeholder-zinc-300 text-white px-8 py-4 rounded-xl hover:scale-105" />
+       </div>
+    </footer>
+  );
+}
 
-            <textarea name="message"  placeholder="Write your message/queries" className="bg-zinc-500 placeholder-zinc-300 text-white px-8 py-10 rounded-xl hover:scale-105" />
+// Helper Components for cleaner code
+// Now accepts an 'href' prop to render as a link
+const ContactPill = ({ Icon, label, value, href }) => {
+    const content = (
+       <>
+          <div className="p-2 bg-stone-800 rounded-full text-white shadow-inner"><Icon size={20} /></div>
+          <div>
+             <p className="text-xs text-stone-400 uppercase tracking-wider font-bold mb-0.5">{label}</p>
+             <p className="font-medium text-stone-100 text-base select-all tracking-wide">{value}</p>
+          </div>
+       </>
+    );
 
-            <button type='submit' className=" border-2 border-dark rounded-lg hover:bg-zinc-500 hover:text-white transform transition-all duration-300 lg:py-2 hover:scale-105">
-                Send
-            </button>
-            
-            </form>
+    const containerClasses = "flex items-center gap-4 bg-stone-900/80 backdrop-blur-sm border border-stone-800 px-6 py-4 rounded-xl hover:border-stone-500 hover:bg-stone-900 transition-all cursor-pointer shadow-lg";
+
+    if (href) {
+        return (
+            <a 
+                href={href} 
+                target={href.startsWith('mailto') ? undefined : "_blank"} 
+                rel={href.startsWith('mailto') ? undefined : "noopener noreferrer"}
+                className={containerClasses}
+            >
+                {content}
+            </a>
+        );
+    }
+
+    return (
+        <div className={containerClasses}>
+            {content}
         </div>
-            </div>
-            <div className="copyright bg-black text-white flex flex-col items-center py-2">
-              <div>FORMACE ARCHITECT SOLUTIONS</div>
-              <div>&copy;images subjected to copyright</div>
-            </div>
-        </div>
-    )
- }
+    );
+};
+
+const SocialIcon = ({ Icon, label, href }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    aria-label={label} 
+    className="p-3 bg-stone-900 border border-stone-800 rounded-full text-stone-400 hover:text-white hover:border-stone-500 hover:bg-stone-800 transition-all duration-300 transform hover:scale-105"
+  >
+     <Icon size={20} />
+  </a>
+);
